@@ -1,0 +1,29 @@
+# Python bytecode and caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environments
+venv/
+env/
+.venv/
+bin/
+include/
+lib/
+
+# Environment Variables (CRITICAL: Do not upload API keys)
+.env
+.env.local
+*.env
+
+# IDE Settings (VS Code, PyCharm, etc.)
+.vscode/
+.idea/
+
+# Streamlit specific
+.streamlit/
+
+# OS Generated files
+.DS_Store
+Thumbs.db

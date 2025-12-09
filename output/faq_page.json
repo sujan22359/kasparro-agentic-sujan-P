@@ -1,0 +1,33 @@
+{
+    "page_type": "faq_page",
+    "content": {
+        "title": "FAQ - GlowBoost Vitamin C Serum",
+        "q_and_a": [
+            {
+                "category": "Safety",
+                "question": "Is GlowBoost Vitamin C Serum safe for all skin types, especially sensitive skin?",
+                "answer": "GlowBoost Vitamin C Serum is formulated with a stable, non-irritating form of Vitamin C (Sodium Ascorbyl Phosphate) and soothing ingredients, making it generally safe for most skin types, including sensitive skin. However, we always recommend performing a patch test on a small area of your skin (e.g., behind the ear or inner forearm) 24 hours before full application, especially if you have very reactive skin. Discontinue use if significant irritation occurs."
+            },
+            {
+                "category": "Usage",
+                "question": "How often should I use GlowBoost Vitamin C Serum, and when should it be incorporated into my skincare routine?",
+                "answer": "For optimal results, apply 3-5 drops of GlowBoost Vitamin C Serum to clean, dry skin once daily, preferably in the morning. Gently press into your face and neck. Allow it to absorb fully before applying subsequent products like moisturizer and, most importantly, a broad-spectrum SPF. Using it in the morning maximizes its antioxidant benefits against environmental stressors."
+            },
+            {
+                "category": "Results",
+                "question": "How long does it typically take to see noticeable results from using GlowBoost Vitamin C Serum?",
+                "answer": "While individual results can vary based on skin type and concerns, many users report seeing a brighter, more radiant complexion and improved skin tone within 2-4 weeks of consistent daily use. For more significant improvements in hyperpigmentation, fine lines, and overall skin texture, it may take 8-12 weeks to observe the full benefits. Consistency is key!"
+            },
+            {
+                "category": "Usage",
+                "question": "Can GlowBoost Vitamin C Serum be used with other active ingredients like retinoids or AHAs?",
+                "answer": "Yes, GlowBoost Vitamin C Serum can be incorporated into a routine with retinoids or AHAs, but with caution to prevent potential irritation. We generally recommend using Vitamin C in the morning to leverage its antioxidant protection, and retinoids or AHAs at night. If you have sensitive skin, consider alternating days (e.g., Vitamin C on Monday, retinoid on Tuesday) rather than using them on the same day, or consult with a dermatologist."
+            },
+            {
+                "category": "Safety",
+                "question": "How should I store GlowBoost Vitamin C Serum to maintain its potency and effectiveness?",
+                "answer": "To preserve the stability and potency of your GlowBoost Vitamin C Serum, store it in a cool, dark place away from direct sunlight and extreme temperatures. Ensure the cap is tightly sealed after each use to minimize exposure to air, which can cause oxidation. While our bottle is designed to protect the formula, proper storage will extend its shelf life and effectiveness."
+            }
+        ]
+    }
+}
