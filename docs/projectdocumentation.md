@@ -9,7 +9,7 @@ Unlike monolithic script-based approaches, this solution utilizes the **CrewAI F
 **Key Technical Components:**
 * **CrewAI:** Manages agent roles, memory, task delegation, and sequential process orchestration.
 * **Pydantic:** Enforces strict output parsing, ensuring the LLM generates valid JSON schemas every time (no regex hacking).
-* **LangChain Google GenAI:** Interfaces with the Gemini 1.5 Flash model for high-speed inference.
+* **LangChain Google GenAI:** Interfaces with the Gemini 2.5 Flash model for high-speed inference.
 * **Streamlit:** Provides a user-friendly frontend interface for real-time interaction.
 * **Pytest:** Validates data models and ensures constraints are met before deployment.
 
