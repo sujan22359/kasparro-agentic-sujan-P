@@ -1,26 +1,24 @@
 {
     "page_type": "product_page",
-    "content": {
-        "title": "GlowBoost Vitamin C Serum",
-        "description": "Experience the power of 10% Vitamin C. Brightening.",
-        "specs": {
-            "name": "GlowBoost Vitamin C Serum",
-            "price": "\u20b9699",
-            "concentration": "10% Vitamin C",
-            "skin_type": [
-                "Oily",
-                "Combination"
-            ],
-            "key_ingredients": [
-                "Vitamin C",
-                "Hyaluronic Acid"
-            ],
-            "benefits": [
-                "Brightening",
-                "Fades dark spots"
-            ],
-            "how_to_use": "Apply 2-3 drops in the morning before sunscreen",
-            "side_effects": "Mild tingling for sensitive skin"
-        }
+    "name": "GlowBoost Vitamin C Serum",
+    "price": "\u20b9699",
+    "description": "Unleash your skin's natural radiance with GlowBoost Vitamin C Serum, a powerful elixir meticulously crafted for oily and combination skin types. This potent serum boasts a 10% concentration of pure Vitamin C, a powerhouse ingredient renowned for its brightening capabilities. Expertly blended with hydrating Hyaluronic Acid, it works synergistically to visibly fade dark spots, even out skin tone, and impart a luminous, healthy glow. To experience its transformative effects, simply apply 2-3 drops to your face every morning before sunscreen. While individuals with sensitive skin may experience a mild tingling sensation, this is a normal indication of the active ingredients at work. Embrace the journey to a brighter, more radiant complexion with GlowBoost Vitamin C Serum.",
+    "key_ingredients": [
+        "Vitamin C",
+        "Hyaluronic Acid"
+    ],
+    "benefits": [
+        "Unleashes skin's natural radiance",
+        "Brightens skin",
+        "Visibly fades dark spots",
+        "Evens out skin tone",
+        "Imparts a luminous, healthy glow",
+        "Promotes a brighter, more radiant complexion"
+    ],
+    "specs": {
+        "skin_type": "Oily and combination skin",
+        "vitamin_c_concentration": "10%",
+        "application": "Apply 2-3 drops to face every morning before sunscreen",
+        "note_for_sensitive_skin": "Mild tingling sensation may occur, which is normal"
     }
 }

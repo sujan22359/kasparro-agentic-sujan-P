@@ -1,33 +1,104 @@
 {
-    "page_type": "faq_page",
-    "content": {
-        "title": "FAQ - GlowBoost Vitamin C Serum",
-        "q_and_a": [
-            {
-                "category": "Safety",
-                "question": "Is GlowBoost Vitamin C Serum safe for all skin types, especially sensitive skin?",
-                "answer": "GlowBoost Vitamin C Serum is formulated with a stable, non-irritating form of Vitamin C (Sodium Ascorbyl Phosphate) and soothing ingredients, making it generally safe for most skin types, including sensitive skin. However, we always recommend performing a patch test on a small area of your skin (e.g., behind the ear or inner forearm) 24 hours before full application, especially if you have very reactive skin. Discontinue use if significant irritation occurs."
-            },
-            {
-                "category": "Usage",
-                "question": "How often should I use GlowBoost Vitamin C Serum, and when should it be incorporated into my skincare routine?",
-                "answer": "For optimal results, apply 3-5 drops of GlowBoost Vitamin C Serum to clean, dry skin once daily, preferably in the morning. Gently press into your face and neck. Allow it to absorb fully before applying subsequent products like moisturizer and, most importantly, a broad-spectrum SPF. Using it in the morning maximizes its antioxidant benefits against environmental stressors."
-            },
-            {
-                "category": "Results",
-                "question": "How long does it typically take to see noticeable results from using GlowBoost Vitamin C Serum?",
-                "answer": "While individual results can vary based on skin type and concerns, many users report seeing a brighter, more radiant complexion and improved skin tone within 2-4 weeks of consistent daily use. For more significant improvements in hyperpigmentation, fine lines, and overall skin texture, it may take 8-12 weeks to observe the full benefits. Consistency is key!"
-            },
-            {
-                "category": "Usage",
-                "question": "Can GlowBoost Vitamin C Serum be used with other active ingredients like retinoids or AHAs?",
-                "answer": "Yes, GlowBoost Vitamin C Serum can be incorporated into a routine with retinoids or AHAs, but with caution to prevent potential irritation. We generally recommend using Vitamin C in the morning to leverage its antioxidant protection, and retinoids or AHAs at night. If you have sensitive skin, consider alternating days (e.g., Vitamin C on Monday, retinoid on Tuesday) rather than using them on the same day, or consult with a dermatologist."
-            },
-            {
-                "category": "Safety",
-                "question": "How should I store GlowBoost Vitamin C Serum to maintain its potency and effectiveness?",
-                "answer": "To preserve the stability and potency of your GlowBoost Vitamin C Serum, store it in a cool, dark place away from direct sunlight and extreme temperatures. Ensure the cap is tightly sealed after each use to minimize exposure to air, which can cause oxidation. While our bottle is designed to protect the formula, proper storage will extend its shelf life and effectiveness."
-            }
-        ]
-    }
+    "FAQPage": [
+        {
+            "question": "Is GlowBoost Vitamin C Serum suitable for sensitive skin?",
+            "answer": "GlowBoost Vitamin C Serum is generally well-tolerated. However, individuals with very sensitive skin may experience a mild tingling sensation upon initial application. This is usually temporary and indicates the active ingredients are working. If irritation persists, we recommend discontinuing use and consulting a dermatologist."
+        },
+        {
+            "question": "Are there any other potential side effects besides mild tingling?",
+            "answer": "Beyond mild tingling for sensitive skin, significant side effects are rare. Always perform a patch test on a small area of skin before full facial application. If you experience redness, itching, burning, or any severe discomfort, rinse immediately and consult a healthcare professional."
+        },
+        {
+            "question": "Can I use GlowBoost Vitamin C Serum if I am pregnant or breastfeeding?",
+            "answer": "While Vitamin C is generally considered safe, we always recommend consulting with your doctor or a healthcare professional before introducing any new skincare products, especially active serums, during pregnancy or breastfeeding."
+        },
+        {
+            "question": "Does this serum increase sun sensitivity?",
+            "answer": "Vitamin C itself does not typically increase sun sensitivity. In fact, it acts as an antioxidant, helping to protect your skin from environmental damage. However, it is absolutely crucial to always follow up with a broad-spectrum sunscreen (SPF 30 or higher) every morning, as Vitamin C works best in conjunction with sun protection to prevent new dark spots and maintain skin health."
+        },
+        {
+            "question": "Is GlowBoost Vitamin C Serum cruelty-free?",
+            "answer": "Yes, GlowBoost Vitamin C Serum is proudly cruelty-free and not tested on animals."
+        },
+        {
+            "question": "Is this product fragrance-free?",
+            "answer": "Yes, GlowBoost Vitamin C Serum is formulated without added artificial fragrances, making it suitable for those sensitive to scents or prone to irritation from fragrance."
+        },
+        {
+            "question": "Is GlowBoost Vitamin C Serum paraben-free?",
+            "answer": "Yes, our serum is formulated without parabens."
+        },
+        {
+            "question": "What should I do if the tingling sensation is more than mild or persists?",
+            "answer": "If you experience more than mild tingling, significant redness, or discomfort that persists for an extended period, we recommend discontinuing use. You might try applying it every other day initially to build tolerance, or consult a dermatologist for personalized advice."
+        },
+        {
+            "question": "How often should I use GlowBoost Vitamin C Serum?",
+            "answer": "For optimal results, apply 2-3 drops of GlowBoost Vitamin C Serum every morning. Consistent daily use is key to seeing visible improvements in skin brightness and dark spot reduction."
+        },
+        {
+            "question": "Can I use this serum at night instead of in the morning?",
+            "answer": "While you can technically use it at night, we highly recommend morning application. Vitamin C provides powerful antioxidant protection against environmental stressors and free radicals encountered throughout the day. Always follow with sunscreen in the morning for maximum benefit."
+        },
+        {
+            "question": "What step in my skincare routine should I apply GlowBoost Vitamin C Serum?",
+            "answer": "Apply GlowBoost Vitamin C Serum after cleansing and toning, but before your moisturizer and sunscreen. It should be applied to clean, dry skin to ensure maximum absorption."
+        },
+        {
+            "question": "Can I layer GlowBoost Vitamin C Serum with other active ingredients like Niacinamide or Retinol?",
+            "answer": "Yes, you can layer it. If using Niacinamide, apply Vitamin C first, wait a few minutes for it to absorb, then apply Niacinamide. For Retinol, we generally recommend using Vitamin C in the morning and Retinol at night to avoid potential irritation and ensure optimal efficacy of both powerful ingredients."
+        },
+        {
+            "question": "How many drops are recommended for each application?",
+            "answer": "We recommend 2-3 drops for your entire face. A small amount is potent and effective, so a little goes a long way!"
+        },
+        {
+            "question": "How long does one bottle of GlowBoost Vitamin C Serum typically last?",
+            "answer": "With consistent daily use of 2-3 drops, one bottle typically lasts approximately 1-2 months, depending on individual usage."
+        },
+        {
+            "question": "How should I store my GlowBoost Vitamin C Serum?",
+            "answer": "To maintain its potency and prevent oxidation, store the serum in a cool, dark place, away from direct sunlight and extreme temperatures. Ensure the cap is tightly closed after each use."
+        },
+        {
+            "question": "Is GlowBoost Vitamin C Serum suitable for men?",
+            "answer": "Absolutely! Skincare is for everyone. Men can benefit from the brightening, dark spot fading, and overall skin health improvements offered by GlowBoost Vitamin C Serum just as much as women."
+        },
+        {
+            "question": "What happens if I forget to apply sunscreen after using the serum?",
+            "answer": "While Vitamin C offers antioxidant protection, it is not a substitute for sunscreen. Forgetting sunscreen can expose your skin to harmful UV rays, potentially undoing the benefits of the serum and increasing the risk of sun damage, premature aging, and new dark spots. Always apply a broad-spectrum SPF 30+ sunscreen."
+        },
+        {
+            "question": "Can I use GlowBoost Vitamin C Serum around my eyes?",
+            "answer": "Yes, you can carefully apply it around the orbital bone, avoiding direct contact with the eyes. If you have very sensitive skin around the eyes, or are prone to irritation, you might prefer a dedicated eye cream."
+        },
+        {
+            "question": "How long will it take to see results from GlowBoost Vitamin C Serum?",
+            "answer": "With consistent daily use, many users start noticing visible improvements in skin brightness and a reduction in the appearance of dark spots within 4-6 weeks. Optimal and more significant results are typically seen after 8-12 weeks of regular application."
+        },
+        {
+            "question": "What kind of results can I expect from using this serum?",
+            "answer": "You can expect a brighter, more radiant complexion, a visible reduction in the appearance of dark spots, hyperpigmentation, and an overall more even skin tone. The added Hyaluronic Acid also helps to keep your skin hydrated, plump, and smooth."
+        },
+        {
+            "question": "Will GlowBoost Vitamin C Serum help with acne or acne scars?",
+            "answer": "While not specifically an acne treatment, Vitamin C can be highly effective in fading post-inflammatory hyperpigmentation (PIH), which are the dark spots left behind after acne breakouts. Its antioxidant properties also support overall skin health, which may indirectly benefit acne-prone skin. For active acne, we recommend consulting a dermatologist."
+        },
+        {
+            "question": "Will this serum make my oily/combination skin feel greasier?",
+            "answer": "No, GlowBoost Vitamin C Serum is specifically formulated for oily and combination skin types. It has a lightweight, fast-absorbing texture that won't leave a greasy residue or contribute to excess oiliness."
+        },
+        {
+            "question": "Is GlowBoost Vitamin C Serum effective for all types of dark spots?",
+            "answer": "It is highly effective for common types of hyperpigmentation such as sun spots, age spots, and post-inflammatory hyperpigmentation (PIH) from acne. For more stubborn or deeper pigmentation like melasma, results may vary, and a combination approach with other targeted treatments might be needed."
+        },
+        {
+            "question": "Is this product non-comedogenic?",
+            "answer": "Yes, GlowBoost Vitamin C Serum is formulated to be non-comedogenic, meaning it's designed not to clog pores. This makes it an excellent choice for oily and combination skin types prone to breakouts."
+        },
+        {
+            "question": "Will the results be permanent?",
+            "answer": "The positive results you achieve with GlowBoost Vitamin C Serum are maintained with continued use. If you stop using the serum, your skin will gradually revert to its previous state, especially with ongoing sun exposure and environmental factors. Consistency is key for lasting benefits and maintaining a radiant complexion."
+        }
+    ]
 }

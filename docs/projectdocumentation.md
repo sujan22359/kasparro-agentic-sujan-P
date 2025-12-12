@@ -1,106 +1,93 @@
-# Project Documentation: Multi-Agent Content Generation System
+# Project Documentation: Agentic Content System 
 
 ## 1. Problem Statement
-The objective was to design and implement a modular, agentic automation system capable of transforming raw, unstructured product data into structured, machine-readable content. The system needed to autonomously generate three distinct web page types (Product Page, FAQ, Comparison) without human intervention, ensuring strict adherence to specific JSON schemas. The challenge emphasized system design, modularity, and the orchestration of multiple AI agents over simple script-based prompting.
+The objective was to design a production-grade **Agentic Automation System** to transform unstructured product data into structured, machine-readable web content (JSON). The system must autonomously generate Product Pages, FAQs (20+ items), and Competitor Comparisons without human intervention. Crucially, the solution required adherence to a strict agentic framework to ensure modularity, scalability, and type safety.
 
 ## 2. Solution Overview
-I architected a **Multi-Agent System (MAS)** that operates as a Directed Acyclic Graph (DAG). The solution is not a monolithic script but a pipeline of specialized agents, each with a single responsibility:
+Unlike monolithic script-based approaches, this solution utilizes the **CrewAI Framework** to orchestrate a team of specialized AI agents. The system replaces manual orchestration with an autonomous crew that delegates tasks based on roles.
 
-- **Parser Agent:** Ingests raw text and converts it into a strictly validated internal data model (`ProductData`).
-- **Strategy Agent:** Analyzes the structured data to generate creative assets (User Questions and Competitor Analysis) that were not present in the source text.
-- **Content Agent:** Synthesizes the data from the previous two agents to populate specific templates (`FAQ`, `Comparison`, `Product Page`) and output clean JSON.
-
-The system is built using **Python**, **Streamlit** for the UI, and **Google Gemini** as the LLM backbone.
+**Key Technical Components:**
+* **CrewAI:** Manages agent roles, memory, task delegation, and sequential process orchestration.
+* **Pydantic:** Enforces strict output parsing, ensuring the LLM generates valid JSON schemas every time (no regex hacking).
+* **LangChain Google GenAI:** Interfaces with the Gemini 1.5 Flash model for high-speed inference.
+* **Streamlit:** Provides a user-friendly frontend interface for real-time interaction.
+* **Pytest:** Validates data models and ensures constraints are met before deployment.
 
 ## 3. Scopes & Assumptions
-- **Scope:** The system is designed to handle short-form product descriptions (approx. 100–300 words) typical of e-commerce listings.
-- **Assumption 1 (Input Fidelity):** It is assumed that the input text contains at least a Product Name and Price. Other fields (like Side Effects) are treated as optional/nullable.
-- **Assumption 2 (Currency):** The Strategy Agent assumes the competitor product should match the currency of the input product to ensure valid comparisons.
-- **Assumption 3 (No External Research):** As per assignment constraints, agents do not browse the live web; they rely on internal logic and the provided dataset to generate “fictional” but realistic competitor data.
+* **Scope:** The system is designed to handle short-form product descriptions typical of e-commerce listings.
+* **Assumption:** The Gemini API key is provided via `.env` or the UI.
+* **Constraint:** The system mimics a real-world production environment by using "Retries" and "Structured Outputs" to prevent hallucinations and strictly follows the "No External Research" rule.
 
 ## 4. System Design
-The architecture follows a modular **Orchestrator-Worker** pattern, ensuring clear agent boundaries and reusable logic.
 
-### 4.1 Architecture Diagram
+### 4.1 Architecture (CrewAI Flow)
+The system follows a **Sequential Process** where data flows through specialized agents in a deterministic path.
 
 ```mermaid
-graph TD
-    UserInput[Raw Text Input] --> Orchestrator
-    Orchestrator --> ParserAgent
-    ParserAgent -- "Extracts & Validates" --> Model[Internal Product Model]
-    Model --> StrategyAgent
-    StrategyAgent -- "Generates Questions & Competitor" --> StrategyData[Strategy JSON]
-    
-    Model --> ContentAgent
-    StrategyData --> ContentAgent
-    
-    ContentAgent -- "Applies Templates" --> Output1[product_page.json]
-    ContentAgent -- "Applies Templates" --> Output2[faq_page.json]
-    ContentAgent -- "Applies Templates" --> Output3[comparison_page.json]
+graph LR
+    Input[Raw Text] --> Agent1[Parser Agent]
+    Agent1 -- "ProductPage Schema" --> Agent2[Strategist Agent]
+    Agent2 -- "FAQPage Schema" --> Agent3[Content Agent]
+    Agent3 -- "ComparisonPage Schema" --> Output[JSON Files]
 ```
-### 4.2 Agent Boundaries & Responsibilities
+# 4.2 Agent Roles & Responsibilities
 
-| Agent Name       | Input                      | Responsibility                                                                 | Output              |
-|------------------|----------------------------|-------------------------------------------------------------------------------|---------------------|
-| **Parser Agent**   | Raw String                 | Clean, validate, and structure data into a Pydantic object                     | ProductData Object  |
-| **Strategy Agent** | ProductData                | Ideate missing content (FAQs) and generate synthetic competitor data           | StrategyDict        |
-| **Content Agent**  | ProductData + StrategyDict | Apply final page templates and serialize structured output into JSON format    | JSON Files          |
-
-
----
-
-### 4.3 Reusable Logic Blocks
-
-To ensure modularity, eliminate redundancy, and improve extensibility, reusable logic is centralized inside:
-
- `src/blocks/`
-
-#### Extraction Logic (`extraction_rules.py`)
-- Uses regex-based pattern detection to extract JSON safely.
-- Cleans responses when the LLM includes:
-  - Markdown formatting
-  - Additional sentences around the JSON
-  - Broken or partial JSON formatting
-
-#### Generation Rules (`generation_rules.py`)
-Ensures consistent formatting standards:
-
-- Currency normalization
-- Comparison matrix alignment
-- FAQ tone, question format, and style consistency
-
-These rules ensure each output is predictable and production-ready.
+| **Agent Role Name** | **Goal** | **Framework / Tools** |
+|---------------------|----------|------------------------|
+| **Parser Agent** <br> *Senior Data Analyst* | Extract factual data from raw text and validate it against the **ProductPage** Pydantic model to ensure 100% accuracy. | CrewAI + Pydantic |
+| **Strategy Agent** <br> *Content Strategist* | Ideate **20+ unique FAQs** and marketing angles based on the parsed data. Validates output against the **FAQPage** model. | CrewAI + Pydantic |
+| **Writer Agent** <br> *Senior Copywriter* | Create fictional competitor data and write compelling, SEO-optimized copy. Validates output against the **ComparisonPage** model. | CrewAI + Pydantic |
 
 
 ---
 
-### 4.4 Data Flow & Orchestration
+# 4.3 Data Flow & Robustness
 
-The `ContentAutomationGraph` class orchestrates communication between all agents and manages pipeline execution.
+### **Ingestion**
+Raw text is passed to the **ContentGenCrew** for processing.
 
-#### **Pipeline Execution Steps:**
+### **Execution**
+The **CrewAI engine** activates agents sequentially to perform their assigned tasks.
 
-1. **Ingest:**  
-   Raw unstructured text is received as input.
+### **Validation (The Safety Layer)**
+- Each agent's output is validated through a **Pydantic Output Parser**.  
+- If the LLM generates invalid JSON (e.g., missing required fields), **CrewAI automatically triggers a self-correction loop** to fix the error.  
+- **Fallback Mechanism:** In rare cases where strict parsing still fails, a custom fallback preserves the raw text to ensure the pipeline does not crash.
 
-2. **Parse:**  
-   `ParserAgent` extracts and validates fields into a structured Pydantic schema.  
-   - If validation fails → pipeline stops with an error.
+---
 
-3. **Strategize:**  
-   The validated `ProductData` is sent to the `StrategyAgent` to generate:  
-   - Competitor dataset  
-   - Missing FAQs  
-   - Creative user question patterns  
+# 5. Testing & Quality Assurance
 
-4. **Generate:**  
-   The `ContentAgent` composes final structured output into three JSON files:
+A dedicated **`tests/`** directory ensures the system's reliability using **Pytest**.
 
-| Output Type | File |
-|------------|-------|
-| Product Page | `product_page.json` |
-| FAQ Page | `faq_page.json` |
-| Comparison Page | `comparison_page.json` |
+### **Schema Validation**
+Tests confirm that:
+- `ProductPage`, `FAQPage`, and `ComparisonPage` models correctly **reject invalid data types**.
+
+### **Constraint Checks**
+Tests verify that:
+- Required fields — such as **price** or **description** — **cannot be omitted**.
+
+### **Logic Verification**
+Unit tests ensure:
+- The **comparison table structure** aligns with the expected format.
+
+---
+
+# 6. How to Run
+
+### **Install Dependencies**
+```bash
+pip install -r requirements.txt
+```
+### **Run Test**
+```bash
+python -m pytest
+```
+### **Launch App**
+```bash
+streamlit run app.py
+```
 
 
 
