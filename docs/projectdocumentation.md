@@ -1,6 +1,6 @@
 # Kasparro Agentic Content System
 
-A robust, modular AI agent system built with **CrewAI** and **Google Gemini 2.5 Flash**. This application orchestrates a team of autonomous agents to analyze product data, generate strategic FAQs, and create data-driven competitor comparisons.
+A robust, modular AI agent system built with **CrewAI** and **Google Gemini 2.5 Flash**. This application orchestrates a team of autonomous agents to analyze product data, generate strategic FAQs, and create data-driven competitor comparisons.  
 
 ## Key Features (Engineering Improvements)
 
