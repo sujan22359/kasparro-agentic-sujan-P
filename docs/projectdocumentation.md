@@ -4,20 +4,11 @@ A robust, modular AI agent system built with **CrewAI** and **Google Gemini 2.5 
 
 ## Key Features (Engineering Improvements)
 
-<<<<<<< HEAD
 * **Modular Architecture:** Agents are defined as dedicated Python classes in `src/agents/`, not monolithic scripts.
 * **Deterministic Tools:** Implements `CompetitorLookupTool` to inject consistent market data, preventing hallucination.
 * **Strict Output Contracts:** Enforces Pydantic schemas (`ProductPage`, `FAQPage`, `ComparisonPage`) for 100% valid JSON output.
 * **Robust Error Handling:** `app.py` includes a smart validation layer that handles schema drifts without crashing the UI.
 * **End-to-End Testing:** Includes a full `pytest` suite for schema validation and integration testing.
-=======
-**Key Technical Components:**
-* **CrewAI:** Manages agent roles, memory, task delegation, and sequential process orchestration.
-* **Pydantic:** Enforces strict output parsing, ensuring the LLM generates valid JSON schemas every time (no regex hacking).
-* **LangChain Google GenAI:** Interfaces with the Gemini 2.5 Flash model for high-speed inference.
-* **Streamlit:** Provides a user-friendly frontend interface for real-time interaction.
-* **Pytest:** Validates data models and ensures constraints are met before deployment.
->>>>>>> 2d3831b80ba914b6c9e077287f988ad4ee777d65
 
 ---
 
