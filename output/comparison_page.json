@@ -1,74 +1,94 @@
 {
-    "ComparisonPage": {
-        "title": "GlowBoost Vitamin C Serum: See How We Shine Brighter",
-        "description": "Discover why GlowBoost Vitamin C Serum is the ultimate choice for radiant, even-toned skin. Compare our powerful formula, targeted benefits, and exceptional value against other leading serums on the market.",
-        "comparisonTable": [
-            {
-                "Feature": "Product Name",
-                "GlowBoost Vitamin C Serum": "GlowBoost Vitamin C Serum",
-                "Competitor A": "RadiantSkin C-Boost Serum",
-                "Competitor B": "Brightening Elixir with Vitamin C"
+    "@context": "https://schema.org",
+    "@type": "ComparisonPage",
+    "name": "Vitamin C Serum Comparison: GlowBoost vs. Competitors",
+    "description": "An honest comparison of GlowBoost Vitamin C Serum with leading market competitors, highlighting key features, concentrations, and pricing.",
+    "mainEntity": [
+        {
+            "@type": "Product",
+            "name": "GlowBoost Vitamin C Serum",
+            "description": "10% Vitamin C, Hyaluronic Acid. Brightening, Fades dark spots. Suitable for Oily, Combination skin. Apply 2-3 drops in the morning before sunscreen. Mild tingling for sensitive skin possible.",
+            "offers": {
+                "@type": "Offer",
+                "priceCurrency": "INR",
+                "price": "699"
             },
-            {
-                "Feature": "Key Active Ingredient",
-                "GlowBoost Vitamin C Serum": "10% Pure Vitamin C (L-Ascorbic Acid)",
-                "Competitor A": "15% Vitamin C Derivative (e.g., SAP)",
-                "Competitor B": "8% Ascorbyl Glucoside"
+            "additionalProperty": [
+                {
+                    "@type": "PropertyValue",
+                    "name": "Vitamin C Concentration",
+                    "value": "10%"
+                },
+                {
+                    "@type": "PropertyValue",
+                    "name": "Key Ingredients",
+                    "value": "Vitamin C, Hyaluronic Acid"
+                },
+                {
+                    "@type": "PropertyValue",
+                    "name": "Skin Type",
+                    "value": "Oily, Combination"
+                },
+                {
+                    "@type": "PropertyValue",
+                    "name": "Benefits",
+                    "value": "Brightening, Fades dark spots"
+                }
+            ]
+        },
+        {
+            "@type": "Product",
+            "name": "LuminousSkin C-Power",
+            "description": "15% Vitamin C, Ferulic Acid. Potent formula for enhanced brightening and antioxidant protection.",
+            "offers": {
+                "@type": "Offer",
+                "priceCurrency": "INR",
+                "price": "1250"
             },
-            {
-                "Feature": "Other Key Ingredients",
-                "GlowBoost Vitamin C Serum": "Hyaluronic Acid",
-                "Competitor A": "Ferulic Acid, Vitamin E",
-                "Competitor B": "Glycerin, Botanical Extracts"
+            "additionalProperty": [
+                {
+                    "@type": "PropertyValue",
+                    "name": "Vitamin C Concentration",
+                    "value": "15%"
+                },
+                {
+                    "@type": "PropertyValue",
+                    "name": "Key Ingredients",
+                    "value": "Vitamin C, Ferulic Acid"
+                },
+                {
+                    "@type": "PropertyValue",
+                    "name": "Size",
+                    "value": "30ml"
+                }
+            ]
+        },
+        {
+            "@type": "Product",
+            "name": "DermaPure Brightener",
+            "description": "10% Vitamin C, Vitamin E. Aims to brighten and protect skin with a classic antioxidant combination.",
+            "offers": {
+                "@type": "Offer",
+                "priceCurrency": "INR",
+                "price": "899"
             },
-            {
-                "Feature": "Targeted Skin Type",
-                "GlowBoost Vitamin C Serum": "Oily, Combination",
-                "Competitor A": "All Skin Types",
-                "Competitor B": "Normal, Dry"
-            },
-            {
-                "Feature": "Primary Benefits",
-                "GlowBoost Vitamin C Serum": "Brightening, Fades dark spots, Hydration, Even Tone",
-                "Competitor A": "Antioxidant protection, Anti-aging, Firming",
-                "Competitor B": "Skin tone correction, Smoothness"
-            },
-            {
-                "Feature": "Application",
-                "GlowBoost Vitamin C Serum": "2-3 drops in the morning before sunscreen",
-                "Competitor A": "3-4 drops in the morning or evening",
-                "Competitor B": "Apply at night after cleansing"
-            },
-            {
-                "Feature": "Price",
-                "GlowBoost Vitamin C Serum": "\u20b9699",
-                "Competitor A": "\u20b91250",
-                "Competitor B": "\u20b9899"
-            },
-            {
-                "Feature": "Cruelty-Free",
-                "GlowBoost Vitamin C Serum": "Yes",
-                "Competitor A": "Yes",
-                "Competitor B": "No information"
-            },
-            {
-                "Feature": "Fragrance-Free",
-                "GlowBoost Vitamin C Serum": "Yes",
-                "Competitor A": "No (contains natural fragrance)",
-                "Competitor B": "Yes"
-            },
-            {
-                "Feature": "Non-Comedogenic",
-                "GlowBoost Vitamin C Serum": "Yes",
-                "Competitor A": "No information",
-                "Competitor B": "Yes"
-            },
-            {
-                "Feature": "Potential Side Effects",
-                "GlowBoost Vitamin C Serum": "Mild tingling for sensitive skin (temporary)",
-                "Competitor A": "May cause redness or irritation for sensitive skin",
-                "Competitor B": "Generally well-tolerated, patch test recommended"
-            }
-        ]
-    }
+            "additionalProperty": [
+                {
+                    "@type": "PropertyValue",
+                    "name": "Vitamin C Concentration",
+                    "value": "10%"
+                },
+                {
+                    "@type": "PropertyValue",
+                    "name": "Key Ingredients",
+                    "value": "Vitamin C, Vitamin E"
+                },
+                {
+                    "@type": "PropertyValue",
+                    "name": "Size",
+                    "value": "30ml"
+                }
+            ]
+        }
+    ]
 }

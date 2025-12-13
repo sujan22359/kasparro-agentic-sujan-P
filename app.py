@@ -1,15 +1,22 @@
 import streamlit as st
 import os
 import json
+import sys
+import signal
 from src.crew import ContentGenCrew
 from dotenv import load_dotenv
+
+# Windows signal fix
+if sys.platform == "win32":
+    unix_signals = ['SIGHUP', 'SIGQUIT', 'SIGTSTP', 'SIGCONT', 'SIGUSR1', 'SIGUSR2']
+    for sig in unix_signals:
+        if not hasattr(signal, sig):
+            setattr(signal, sig, 1)
 
 load_dotenv()
 
 st.set_page_config(page_title="Kasparro Agentic System", layout="wide")
-
-st.title("Kasparro Agentic Content System (CrewAI Edition)")
-st.markdown("This system uses **CrewAI** framework to orchestrate agents for content generation.")
+st.title("Kasparro Agentic Content System ")
 
 # Sidebar
 with st.sidebar:
@@ -42,31 +49,37 @@ if st.button("Launch Crew"):
             os.makedirs("output", exist_ok=True)
             tab1, tab2, tab3 = st.tabs(["Product Page", "FAQ Page", "Comparison Page"])
             
-            # --- ROBUST OUTPUT HANDLER ---
             def handle_output(data, filename, tab):
                 json_data = {}
                 
-                # Case 1: Pydantic Model (Success)
+                # 1. Best Case: Strict Pydantic Model
                 if hasattr(data, 'model_dump'):
                     json_data = data.model_dump()
                 elif hasattr(data, 'dict'):
                     json_data = data.dict()
                 
-                # Case 2: Dictionary (Partial Success)
+                # 2. Good Case: Valid JSON Dictionary
                 elif isinstance(data, dict):
                     json_data = data
                 
-                # Case 3: Raw String (Validation Failed, but we have text)
-                else:
+                # 3. Handle Raw String (Prevent Crash)
+                # If Strict Parsing failed, we manually parse the JSON to ensure it is valid.
+                elif isinstance(data, str):
                     try:
-                        # Try to parse the string as JSON
-                        clean_str = str(data).replace("```json", "").replace("```", "")
-                        json_data = json.loads(clean_str)
+                        clean_text = data.replace("```json", "").replace("```", "").strip()
+                        json_data = json.loads(clean_text)
                     except:
-                        # If all else fails, show raw text
-                        json_data = {"raw_content": str(data)}
+                        st.error(f"Could not parse JSON for {filename}")
+                        with tab:
+                            st.text(data) # Show raw text at least
+                        return
 
-                # Save & Display
+                # 4. Handle None
+                else:
+                    st.error(f"No data returned for {filename}")
+                    return
+
+                # Save and Display
                 with open(f"output/{filename}", "w") as f:
                     json.dump(json_data, f, indent=4)
                 

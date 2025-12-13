@@ -1,94 +1,120 @@
-# Project Documentation: Agentic Content System 
+# Kasparro Agentic Content System
 
-## 1. Problem Statement
-The objective was to design a production-grade **Agentic Automation System** to transform unstructured product data into structured, machine-readable web content (JSON). The system must autonomously generate Product Pages, FAQs (20+ items), and Competitor Comparisons without human intervention. Crucially, the solution required adherence to a strict agentic framework to ensure modularity, scalability, and type safety.
+A robust, modular AI agent system built with **CrewAI** and **Google Gemini 2.5 Flash**. This application orchestrates a team of autonomous agents to analyze product data, generate strategic FAQs, and create data-driven competitor comparisons.
 
-## 2. Solution Overview
-Unlike monolithic script-based approaches, this solution utilizes the **CrewAI Framework** to orchestrate a team of specialized AI agents. The system replaces manual orchestration with an autonomous crew that delegates tasks based on roles.
+## Key Features (Engineering Improvements)
 
-**Key Technical Components:**
-* **CrewAI:** Manages agent roles, memory, task delegation, and sequential process orchestration.
-* **Pydantic:** Enforces strict output parsing, ensuring the LLM generates valid JSON schemas every time (no regex hacking).
-* **LangChain Google GenAI:** Interfaces with the Gemini 1.5 Flash model for high-speed inference.
-* **Streamlit:** Provides a user-friendly frontend interface for real-time interaction.
-* **Pytest:** Validates data models and ensures constraints are met before deployment.
+* **Modular Architecture:** Agents are defined as dedicated Python classes in `src/agents/`, not monolithic scripts.
+* **Deterministic Tools:** Implements `CompetitorLookupTool` to inject consistent market data, preventing hallucination.
+* **Strict Output Contracts:** Enforces Pydantic schemas (`ProductPage`, `FAQPage`, `ComparisonPage`) for 100% valid JSON output.
+* **Robust Error Handling:** `app.py` includes a smart validation layer that handles schema drifts without crashing the UI.
+* **End-to-End Testing:** Includes a full `pytest` suite for schema validation and integration testing.
 
-## 3. Scopes & Assumptions
-* **Scope:** The system is designed to handle short-form product descriptions typical of e-commerce listings.
-* **Assumption:** The Gemini API key is provided via `.env` or the UI.
-* **Constraint:** The system mimics a real-world production environment by using "Retries" and "Structured Outputs" to prevent hallucinations and strictly follows the "No External Research" rule.
+---
 
-## 4. System Design
+## System Architecture
 
-### 4.1 Architecture (CrewAI Flow)
-The system follows a **Sequential Process** where data flows through specialized agents in a deterministic path.
+The project follows a production-grade folder structure:
 
-```mermaid
-graph LR
-    Input[Raw Text] --> Agent1[Parser Agent]
-    Agent1 -- "ProductPage Schema" --> Agent2[Strategist Agent]
-    Agent2 -- "FAQPage Schema" --> Agent3[Content Agent]
-    Agent3 -- "ComparisonPage Schema" --> Output[JSON Files]
+```text
+E:\Kasparro\kasparro-ai-agentic-content-generation-system\
+├── src/
+│   ├── agents/             # Modular Agent Definitions
+│   │   ├── parser_agent.py   (Senior Data Analyst)
+│   │   ├── strategy_agent.py (Content Strategist)
+│   │   └── writer_agent.py   (Senior Copywriter)
+│   ├── tools/              # Custom Tools
+│   │   └── search_tools.py   (Competitor Lookup Logic)
+│   ├── config/             # Configuration & Factories
+│   │   └── llm_logic.py      (Gemini 1.5 Flash Setup)
+│   ├── models/             # Pydantic Schemas
+│   │   └── schemas.py        (Strict JSON definitions)
+│   └── crew.py             # Orchestration Logic
+├── tests/                  # CI/CD Testing Suite
+│   ├── test_pipeline.py    (End-to-End Integration)
+│   └── test_schemas.py     (Unit Tests)
+├── app.py                  # Streamlit UI (Robust Rendering)
+└── requirements.txt        # Pinned Dependencies
 ```
-# 4.2 Agent Roles & Responsibilities
 
-| **Agent Role Name** | **Goal** | **Framework / Tools** |
-|---------------------|----------|------------------------|
-| **Parser Agent** <br> *Senior Data Analyst* | Extract factual data from raw text and validate it against the **ProductPage** Pydantic model to ensure 100% accuracy. | CrewAI + Pydantic |
-| **Strategy Agent** <br> *Content Strategist* | Ideate **20+ unique FAQs** and marketing angles based on the parsed data. Validates output against the **FAQPage** model. | CrewAI + Pydantic |
-| **Writer Agent** <br> *Senior Copywriter* | Create fictional competitor data and write compelling, SEO-optimized copy. Validates output against the **ComparisonPage** model. | CrewAI + Pydantic |
+## Agents & Roles
+### Senior Data Analyst (ParserAgent)
 
+**Goal:**  
+Extract factual attributes (Price, Ingredients) with zero hallucination.
 
----
-
-# 4.3 Data Flow & Robustness
-
-### **Ingestion**
-Raw text is passed to the **ContentGenCrew** for processing.
-
-### **Execution**
-The **CrewAI engine** activates agents sequentially to perform their assigned tasks.
-
-### **Validation (The Safety Layer)**
-- Each agent's output is validated through a **Pydantic Output Parser**.  
-- If the LLM generates invalid JSON (e.g., missing required fields), **CrewAI automatically triggers a self-correction loop** to fix the error.  
-- **Fallback Mechanism:** In rare cases where strict parsing still fails, a custom fallback preserves the raw text to ensure the pipeline does not crash.
+**Logic:**  
+Enforces strict Pydantic models to ensure data integrity.
 
 ---
 
-# 5. Testing & Quality Assurance
+### Content Strategist (StrategyAgent)
 
-A dedicated **`tests/`** directory ensures the system's reliability using **Pytest**.
+**Goal:**  
+Generate high-value FAQ content based on user intent.
 
-### **Schema Validation**
-Tests confirm that:
-- `ProductPage`, `FAQPage`, and `ComparisonPage` models correctly **reject invalid data types**.
-
-### **Constraint Checks**
-Tests verify that:
-- Required fields — such as **price** or **description** — **cannot be omitted**.
-
-### **Logic Verification**
-Unit tests ensure:
-- The **comparison table structure** aligns with the expected format.
+**Constraint:**  
+Strictly enforces the generation of 20+ questions.
 
 ---
 
-# 6. How to Run
+### Senior Copywriter (WriterAgent)
 
-### **Install Dependencies**
+**Goal:**  
+Create objective comparison tables.
+
+**Tools:**  
+Uses `CompetitorLookupTool` to fetch deterministic competitor data instead of guessing.
+
+## Installation & Setup
+
+### 1. Clone the Repository
+
 ```bash
-pip install -r requirements.txt
+    git clone <your-repo-url>
+    cd kasparro-ai-agentic-content-generation-system
 ```
-### **Run Test**
+### 2. Install Dependencies
+```bash
+   pip install -r requirements.txt
+```
+### 3.Environment Setup Create a `.env` file in the root directory:
+```bash
+GEMINI_API_KEY=your_google_api_key_here
+```
+## ▶️ Usage
+
+### Run the Web Application:
+``` bash
+streamlit run app.py
+```
+The UI will launch at:  
+`http://localhost:8501`
+
+**Steps:**
+1. Paste raw product text into the input box.
+2. Click **"Launch Crew"**.
+3. View results in the **Product**, **FAQ**, and **Comparison** tabs.
+
+## Testing
+### This project includes a comprehensive test suite using `pytest`.
+
+**Run All Tests:**
 ```bash
 python -m pytest
 ```
-### **Launch App**
-```bash
-streamlit run app.py
-```
+### Test Coverage:
+  - **test_schemas.py**  
+  Validates that Pydantic models correctly reject invalid data types.
 
+  - **test_pipeline.py**  
+  Runs a live simulation of the CrewAI pipeline to ensure all agents communicate and return files.
+
+---
+
+### Note on Rate Limits
+
+The integration test runs multiple agents rapidly. On the **Google Gemini Free Tier**, you may occasionally encounter a `429 ResourceExhausted` error. This is an API limitation, not a code failure. Retrying after **60 seconds** typically resolves the issue.
 
 
 

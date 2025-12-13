@@ -1,5 +1,8 @@
-from crewai import Agent, Task, Crew, Process
+from crewai import Crew, Task, Process
 from src.config.llm_logic import LLMFactory
+from src.agents.parser_agent import ParserAgent
+from src.agents.strategy_agent import StrategyAgent
+from src.agents.writer_agent import WriterAgent
 from src.models.schemas import ProductPage, FAQPage, ComparisonPage
 
 class ContentGenCrew:
@@ -7,83 +10,47 @@ class ContentGenCrew:
         self.llm = LLMFactory.create_llm()
 
     def run(self, raw_text: str):
-        # --- AGENTS ---
-        parser_agent = Agent(
-            role='Senior Data Analyst',
-            goal='Extract structured product data from raw text with 100% accuracy.',
-            backstory='You are an expert at structuring messy data. You pay attention to every detail.',
-            llm=self.llm,
-            verbose=True,
-            allow_delegation=False
-        )
+        parser = ParserAgent(self.llm)
+        strategist = StrategyAgent(self.llm)
+        writer = WriterAgent(self.llm)
 
-        strategy_agent = Agent(
-            role='Content Strategist',
-            goal='Brainstorm user questions and competitor analysis based on product data.',
-            backstory='You are a marketing genius who knows exactly what customers ask.',
-            llm=self.llm,
-            verbose=True,
-            allow_delegation=False
-        )
-
-        writer_agent = Agent(
-            role='Senior Copywriter',
-            goal='Write compelling, SEO-optimized web content.',
-            backstory='You write engaging product descriptions that convert visitors into buyers.',
-            llm=self.llm,
-            verbose=True,
-            allow_delegation=False
-        )
-
-        # --- TASKS ---
         task_product = Task(
-            description=f"Analyze text: '{raw_text}'. Extract Name, Price, Ingredients. Write a compelling description. Structure as ProductPage.",
-            expected_output="A structured ProductPage object.",
-            agent=parser_agent,
-            output_pydantic=ProductPage
+            description=f"Analyze text: {raw_text}. Extract Name, Price, Ingredients.",
+            expected_output="A valid ProductPage JSON object.",
+            agent=parser,
+            output_pydantic=ProductPage 
         )
 
         task_faq = Task(
-            description=f"Based on '{raw_text}', generate 20+ FAQs (Safety, Usage, Results). Structure as FAQPage.",
-            expected_output="A structured FAQPage object.",
-            agent=strategy_agent,
+            description=f"Generate 20+ FAQs based on: {raw_text}.",
+            expected_output="A valid FAQPage JSON object.",
+            agent=strategist,
             output_pydantic=FAQPage
         )
 
         task_comparison = Task(
-            description=f"Based on '{raw_text}', create a competitor comparison table. Structure as ComparisonPage.",
-            expected_output="A structured ComparisonPage object.",
-            agent=writer_agent,
+            description=f"Use the 'Market Competitor Database' tool to find competitors for: {raw_text}. Create a comparison table.",
+            expected_output="A valid ComparisonPage JSON object.",
+            agent=writer,
             output_pydantic=ComparisonPage
         )
 
-        # --- CREW EXECUTION ---
+        
         crew = Crew(
-            agents=[parser_agent, strategy_agent, writer_agent],
+            agents=[parser, strategist, writer],
             tasks=[task_product, task_faq, task_comparison],
             process=Process.sequential,
-            verbose=True
+            verbose=True,
+            memory=False 
         )
 
         crew.kickoff()
 
-        def get_safe_output(task):
-            # 1. Try Pydantic Model (Best case)
-            if hasattr(task.output, 'pydantic') and task.output.pydantic is not None:
-                return task.output.pydantic
-            
-            # 2. Try JSON Dict (Second best)
-            if hasattr(task.output, 'json_dict') and task.output.json_dict is not None:
-                return task.output.json_dict
-            
-            # 3. Fallback to Raw String (Worst case, but better than crashing)
-            return {
-                "raw_content": str(task.output.raw),
-                "note": "AI generated content but strict parsing failed. Raw text preserved."
-            }
-
+        # --- THE FIX ---
+        # If Pydantic is None (strict validation failed), return the RAW output.
+        # This prevents the "NoneType" crash in app.py.
         return {
-            "product_page": get_safe_output(task_product),
-            "faq_page": get_safe_output(task_faq),
-            "comparison_page": get_safe_output(task_comparison)
+            "product_page": task_product.output.pydantic if task_product.output.pydantic else task_product.output.raw,
+            "faq_page": task_faq.output.pydantic if task_faq.output.pydantic else task_faq.output.raw,
+            "comparison_page": task_comparison.output.pydantic if task_comparison.output.pydantic else task_comparison.output.raw
         }
