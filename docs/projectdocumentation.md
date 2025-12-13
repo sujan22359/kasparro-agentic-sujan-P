@@ -82,7 +82,7 @@ Uses `CompetitorLookupTool` to fetch deterministic competitor data instead of gu
 ```bash
 GEMINI_API_KEY=your_google_api_key_here
 ```
-## ▶️ Usage
+##  Usage
 
 ### Run the Web Application:
 ``` bash
